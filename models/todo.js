@@ -59,19 +59,17 @@ module.exports = (sequelize, DataTypes) => {
           where: { id: id },
         }
       )
-      console.log(changes)
       return changes[0] === 1 ?  id : null
     }
 
     //ToDoの削除
     static async remove(id){
-      const todo = await this.destroy(
+      const changes = await this.destroy(
         { 
           where: { id:id },
-          attributes: ['id', 'title', 'description', 'deadline', 'completed']
         }
       )
-      return(todo)
+      return changes === 1 ?  id : null
     }
   }
 
